@@ -8,10 +8,18 @@ import './Chat.css'
 
 class Chat extends Component {
     state = {
-        user: null
+        user: null,
+        loading: false
+    }
+
+    loading = (state) => {
+        this.setState({
+            loading: state
+        })
     }
 
     componentDidMount() {
+        this.loading(true)
         client({
             url: '/get_or_create_user.json',
             method: 'post',
@@ -23,10 +31,12 @@ class Chat extends Component {
                 user: r.data.user
             })
             localStorage.setItem('userId', r.data.user._id)
+            this.loading(false)
         })
     }
 
     handleSend = (message) => {
+        this.loading(true)
         client({
             url: '/post_chat_event.json',
             method: 'post',
@@ -39,6 +49,7 @@ class Chat extends Component {
             this.setState({
                 user: r.data.user
             })
+            this.loading(false)
         })
     }
 
@@ -46,11 +57,15 @@ class Chat extends Component {
 
     render() {
         const user = this.state.user || { history:[] }
+        const loading = this.state.loading
         return (
             <div className="Chat">
                 <div className="container">
                     <Stream messages={user.history}/>
-                    <TextField onSend={this.handleSend} />
+                    {loading ?
+                        <div className='loading'>🤔</div> :
+                        <TextField onSend={this.handleSend} />
+                    }
                 </div>
             </div>
         );

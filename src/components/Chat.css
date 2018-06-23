@@ -8,3 +8,14 @@
 .Chat .container {
     width: 300px;
 }
+
+.Chat .loading {
+    font-size: 25px;
+    animation: Chat-loading-spin infinite 0.5s linear;
+}
+
+@keyframes Chat-loading-spin {
+    0% { transform: rotate(-10deg); }
+    60% { transform: rotate(40deg); }
+    100% { transform: rotate(-10deg); }
+}
