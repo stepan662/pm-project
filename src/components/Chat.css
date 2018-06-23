@@ -1,0 +1,10 @@
+.Chat {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+}
+
+.Chat .container {
+    width: 300px;
+}
