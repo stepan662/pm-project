@@ -1,0 +1,11 @@
+{
+  "name": "functions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^3.0.10"
+  }
+}
