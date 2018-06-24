@@ -3,19 +3,24 @@ const request = require('request')
 
 async function updateDb(collection, userId, message, watsonMessage) {
     try {
+        const messages = []
+        if (message && message.length > 0) {
+            messages.push({
+                message,
+                fromUser: true,
+                timestamp: Date.now()
+            })
+        }
+        messages.push({
+            message: watsonMessage,
+            fromUser: false,
+            timestamp: Date.now() + 1
+        })
         const data = await collection.findOneAndUpdate({
             _id: mongodb.ObjectId(userId)
         }, {
             $push: {
-                history: { $each: [{
-                    message,
-                    fromUser: true,
-                    timestamp: Date.now()
-                }, {
-                    message: watsonMessage,
-                    fromUser: false,
-                    timestamp: Date.now() + 1
-                }]}
+                history: { $each: messages }
             }
         }, {
             returnOriginal: false
