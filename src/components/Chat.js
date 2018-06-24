@@ -24,13 +24,15 @@ class Chat extends Component {
             url: '/get_or_create_user.json',
             method: 'post',
             data: {
-                userId: localStorage.getItem('userId')
+                userId: localStorage.getItem('userId'),
             }
         }).then(r => {
             this.setState({
                 user: r.data.user
             })
+            console.log(r.data)
             localStorage.setItem('userId', r.data.user._id)
+            localStorage.setItem('conversation_id', JSON.stringify(r.data.conversation_id))
             this.loading(false)
         })
     }
@@ -43,12 +45,17 @@ class Chat extends Component {
             data: {
                 userId: localStorage.getItem('userId'),
                 message: message,
-                fromUser: true,
+                watsonContext: {
+                    context: {
+                        conversation_id: JSON.parse(localStorage.getItem('conversation_id'))
+                    }
+                }
             }
         }).then(r => {
             this.setState({
                 user: r.data.user
             })
+            localStorage.setItem('conversation_id', JSON.stringify(r.data.conversation_id))
             this.loading(false)
         })
     }
