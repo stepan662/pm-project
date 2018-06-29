@@ -62,7 +62,7 @@ class Chat extends Component {
             this.setState({
                 user: r.data.user
             })
-            localStorage.setItem('conversation_id', JSON.stringify(r.data.conversation_id))
+            localStorage.setItem('watsonContext', JSON.stringify(r.data.watsonContext))
             this.loading(false)
         })
     }
