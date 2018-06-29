@@ -8,10 +8,12 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to PM Project</h1>
+          <h1 className="App-title">Welcome to Smart Assistant for choosing a Car</h1>
         </header>
         <Chat />
+        <footer className="App-footer">
+        <p></p>
+        </footer>
       </div>
     );
   }
