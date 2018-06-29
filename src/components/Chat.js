@@ -36,7 +36,7 @@ class Chat extends Component {
             })
             console.log(r.data)
             localStorage.setItem('userId', r.data.user._id)
-            localStorage.setItem('conversation_id', JSON.stringify(r.data.conversation_id))
+            localStorage.setItem('watsonContext', JSON.stringify(r.data.watsonContext))
             this.scrollToBottom();
             this.loading(false)
         })
@@ -55,9 +55,7 @@ class Chat extends Component {
                 userId: localStorage.getItem('userId'),
                 message: message,
                 watsonContext: {
-                    context: {
-                        conversation_id: JSON.parse(localStorage.getItem('conversation_id'))
-                    }
+                    context: JSON.parse(localStorage.getItem('watsonContext'))
                 }
             }
         }).then(r => {

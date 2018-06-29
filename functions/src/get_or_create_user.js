@@ -59,7 +59,7 @@ async function main(params) {
 
     client.close()
     return {
-        conversation_id: watsonResponse.context.conversation_id,
+        watsonContext: watsonResponse.context,
         user
     }
 }

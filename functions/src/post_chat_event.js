@@ -77,8 +77,6 @@ async function main(params) {
         params.message
     )
 
-    console.log(watsonResponse)
-
     const dbData = await updateDb(
         collection,
         params.userId,
@@ -88,7 +86,7 @@ async function main(params) {
 
     client.close()
     return {
-        conversation_id: watsonResponse.context.conversation_id,
+        watsonContext: watsonResponse.context,
         ...dbData
     }
 }
